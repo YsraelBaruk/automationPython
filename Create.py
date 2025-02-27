@@ -125,7 +125,7 @@ def cadastroAluno(driver, lista_alunos): # , lista_alunos):
         onclick_value = elemento.get_attribute("onclick")
         url = onclick_value.split("location.href='")[1].split("'")[0]
         
-        urlHome = os.getenv("HOME") + url
+        urlHome = "https://sei.sp.gov.br/sei" + url
 
         colaAluno(aluno, lastRow, abaMain)
 
@@ -139,8 +139,10 @@ user = os.getenv("USER")
 passw = os.getenv("PASS")
 site = os.getenv("SITE")
 def criarProntuario(lista_alunos):
+    opt = webdriver.ChromeOptions()
+    opt.add_argument("--headless=new")
     service = Service(ChromeDriverManager().install())
-    driver = webdriver.Chrome(service=service)
+    driver = webdriver.Chrome(service=service, options=opt)
     driver.maximize_window()
 
     print(user, passw, site)
